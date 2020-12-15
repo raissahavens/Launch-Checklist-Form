@@ -9,59 +9,65 @@ window.addEventListener("load", function(event) {
               let fuel = document.getElementById("fuelStatus");
               let launch = document.getElementById("launchStatus");
               let cargo = document.getElementById("cargoStatus");
+              let items = document.getElementById("faultyItems")
+              const letters = /^[a-zA-Z]+$/;
+              const number = /^[0-9]+$/;
+              event.preventDefault();
 
-                 if (Number(pilotInput.value) === "") {
-                    window.alert("All fields are required!");
+                  if (!letters.test(pilotInput.value)) {
+                    alert("Make sure to enter valid information for the name field.");
                  }
-                 if (Number(copilotInput.value) === "") {
-                     window.alert("All fields are required!");
+                 else if (!letters.test(copilotInput.value)) {
+                     alert("Make sure to enter valid information for the name field.");
                   }
-                  if (fuelInput.value === "") {
-                     window.alert("All fields are required!");
+                  else if (!number.test(fuelInput.value)) {
+                     alert("Make sure to enter valid information for each field.");
                   }
-                  if (cargoInput.value === "") {
-                     window.alert("All fields are required!");
+                  else if (!number.test(cargoInput.value)) {
+                     alert("Make sure to enter valid information for each field.");;
                   }
-                  if ( isNaN(Number(pilotInput.value))===false || isNaN(Number(copilotInput.value))===false ) {
-                     window.alert("Please inform names only.");
+                  else if ( isNaN(pilotInput.value)===false || isNaN(copilotInput.value)===false ) {
+                     alert("Make sure to enter valid information for the name field.");
                   }
-                  if ( isNan(fuelInput.value) || isNaN(cargoInput.value) ) {
-                     window.alert("Please inform numbers only.");
+                  else if ( isNaN(fuelInput.value) || isNaN(cargoInput.value) ) {
+                     alert("Make sure to enter valid information for each field.");
                   }
-   document.getElementById("pilotStatus").innerHTML = `${pilotInput}`
-   document.getElementById("copilotStatus").innerHTML = `${copilotInput}`
+                  document.getElementById("pilotStatus").innerHTML = `${pilotInput.value}`
+                  document.getElementById("copilotStatus").innerHTML = `${copilotInput.value}`
+                  items.style.visibility = "visible"
 
-   if (fuelLevel < 10,000){
-   fuel.innerHTML = "There is not enough fuel for the journey.";
-   launch.innerHTML = "Shuttle not ready for launch";
-   launch.style.backgroundColor = "red";
-   }
+                  if (fuelInput.value < 10000){
+                  fuel.innerHTML = "There is not enough fuel for the journey.";
+                  launch.innerHTML = "Shuttle not ready for launch";
+                  launch.style.color = "red";
+                  }
 
-   if (cargoMass > 10,000) {
-   cargo.innerHTML = "Too much mass for the shuttle to take off.";
-   launch.innerHTML = "Shuttle not ready for launch";
-   launch.style.backgroundColor = "red";
-   }
-   else {
-   launch.innerHTML =  "Shuttle is ready for launch";
-   launch.style.backgroundColor = "green";
-   }
+                  if (cargoInput.value > 10000) {
+                  cargo.innerHTML = "Too much mass for the shuttle to take off.";
+                  launch.innerHTML = "Shuttle not ready for launch";
+                  launch.style.color = "red";
+                  }
+                  else {
+                  launch.innerHTML =  "Shuttle is ready for launch";
+                  launch.style.color = "green";
+                  }
 
-// fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
-// response.json().then(function(json) {
-   // const div = document.getElementById("missionTarget")
-// div.innerHTML = `
-/*<h2>Mission Destination</h2>
+fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+response.json().then(function(json) {
+let index = 3;
+const div = document.getElementById("missionTarget")
+div.innerHTML = `
+<h2>Mission Destination</h2>
 <ol>
-   <li>Name: ${json.name}</li>
-   <li>Diameter: ${json.diameter}</li>
-   <li>Star: ${json.star}</li>
-   <li>Distance from Earth: ${json.distanceFromEarth}</li>
-   <li>Number of Moons: ${json.NumberOfMoons}</li>
+   <li>Name: ${json[index].name}</li>
+   <li>Diameter: ${json[index].diameter}</li>
+   <li>Star: ${json[index].star}</li>
+   <li>Distance from Earth: ${json[index].distance}</li>
+   <li>Number of Moons: ${json[index].moons}</li>
 </ol>
-<img src="${}">
-*/
-
-event.preventDefault();
-});        
+<img src="${json[index].image}">
+`
+});
+});
+});      
 });

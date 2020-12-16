@@ -10,45 +10,39 @@ window.addEventListener("load", function(event) {
               let launch = document.getElementById("launchStatus");
               let cargo = document.getElementById("cargoStatus");
               let items = document.getElementById("faultyItems")
-              const letters = /^[a-zA-Z]+$/;
+              const letters = /^[a-zA-Z\s]+$/;
               const number = /^[0-9]+$/;
               event.preventDefault();
 
                   if (!letters.test(pilotInput.value)) {
                     alert("Make sure to enter valid information for the name field.");
                  }
-                 else if (!letters.test(copilotInput.value)) {
+                  if (!letters.test(copilotInput.value)) {
                      alert("Make sure to enter valid information for the name field.");
                   }
-                  else if (!number.test(fuelInput.value)) {
+                  if (!number.test(fuelInput.value)) {
                      alert("Make sure to enter valid information for each field.");
                   }
-                  else if (!number.test(cargoInput.value)) {
+                  if (!number.test(cargoInput.value)) {
                      alert("Make sure to enter valid information for each field.");;
                   }
-                  else if ( isNaN(pilotInput.value)===false || isNaN(copilotInput.value)===false ) {
-                     alert("Make sure to enter valid information for the name field.");
-                  }
-                  else if ( isNaN(fuelInput.value) || isNaN(cargoInput.value) ) {
-                     alert("Make sure to enter valid information for each field.");
-                  }
-                  document.getElementById("pilotStatus").innerHTML = `${pilotInput.value}`
-                  document.getElementById("copilotStatus").innerHTML = `${copilotInput.value}`
+                  document.getElementById("pilotStatus").innerHTML = `${pilotInput.value} ready`
+                  document.getElementById("copilotStatus").innerHTML = `${copilotInput.value} ready`
                   items.style.visibility = "visible"
 
                   if (fuelInput.value < 10000){
-                  fuel.innerHTML = "There is not enough fuel for the journey.";
-                  launch.innerHTML = "Shuttle not ready for launch";
+                  fuel.innerText = "There is not enough fuel for the journey.";
+                  launch.innerText = "Shuttle not ready for launch";
                   launch.style.color = "red";
                   }
 
-                  if (cargoInput.value > 10000) {
-                  cargo.innerHTML = "Too much mass for the shuttle to take off.";
-                  launch.innerHTML = "Shuttle not ready for launch";
+                  else if (cargoInput.value > 10000) {
+                  cargo.innerText = "Too much mass for the shuttle to take off.";
+                  launch.innerText = "Shuttle not ready for launch";
                   launch.style.color = "red";
                   }
                   else {
-                  launch.innerHTML =  "Shuttle is ready for launch";
+                  launch.innerText =  "Shuttle is ready for launch";
                   launch.style.color = "green";
                   }
 

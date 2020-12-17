@@ -26,8 +26,8 @@ window.addEventListener("load", function(event) {
                   if (!number.test(cargoInput.value)) {
                      alert("Make sure to enter valid information for each field.");;
                   }
-                  document.getElementById("pilotStatus").innerHTML = `${pilotInput.value} ready`
-                  document.getElementById("copilotStatus").innerHTML = `${copilotInput.value} ready`
+                  document.getElementById("pilotStatus").innerHTML = `${pilotInput.value} is ready`
+                  document.getElementById("copilotStatus").innerHTML = `${copilotInput.value} is ready`
                   items.style.visibility = "visible"
 
                   if (fuelInput.value < 10000){
@@ -48,7 +48,8 @@ window.addEventListener("load", function(event) {
 
 fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
 response.json().then(function(json) {
-let index = 3;
+let index = Math.floor(Math.random()*10);
+console.log(index);
 const div = document.getElementById("missionTarget")
 div.innerHTML = `
 <h2>Mission Destination</h2>
